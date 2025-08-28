@@ -1,8 +1,8 @@
 {
   "name": "Asset Portfolio",
   "short_name": "Portfolio",
-  "start_url": "/portfolio/index.html",
-  "scope": "/portfolio/",
+  "start_url": "/AssetPortfolio/index.html",
+  "scope": "/AssetPortfolio/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
