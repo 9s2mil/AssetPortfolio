@@ -1,0 +1,507 @@
+:root {
+    --pad: 12px;
+    --radius: 12px;
+    --gap: 10px;
+    --border: #d9d9de;
+    --muted: #6b7280;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, "Noto Sans KR", Roboto, Arial, sans-serif;
+    background: #f7f7f8;
+    color: #111;
+}
+
+.wrap {
+    max-width: 440px;
+    margin: 0 auto;
+    padding: env(safe-area-inset-top) var(--pad) env(safe-area-inset-bottom);
+}
+
+header {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+    margin: 12px 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .03);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1rem;
+    text-align: center;
+    font-weight: 800;
+}
+
+.dash {
+    border-top: 3px dashed #bbb;
+    margin: 10px 0;
+}
+
+#controls {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap
+}
+
+#controls-center {
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+#controls button {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fff;
+    font-weight: 700
+}
+
+#controls .primary {
+    background: #ffa7a7;
+    color: #fff
+}
+
+#controls-center button.pulse {
+    background: #fff59d;
+    border-color: #f6d365
+}
+
+.pulse {
+    animation: pulseZoom 1.15s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes pulseZoom {
+
+    0%,
+    100% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(1.08)
+    }
+}
+
+
+.card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, .03);
+}
+
+#totalBox {
+    font-weight: 800;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+thead th {
+    font-size: .9rem;
+    color: #374151;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    padding: 8px 4px;
+}
+
+tbody td,
+tbody th {
+    padding: 8px 6px;
+    border-bottom: 1px dashed #ececf1;
+    vertical-align: middle;
+}
+
+tbody th {
+    text-align: left;
+    font-weight: 600;
+}
+
+td.num {
+    text-align: right;
+    white-space: nowrap;
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    font-size: .95rem;
+}
+
+input[disabled] {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.unit {
+    font-size: .8rem;
+    color: var(--muted);
+    display: block;
+    margin-top: 4px;
+}
+
+#assetTable {
+    font-size: calc(1rem - 2px)
+}
+
+#assetTable tbody td.num {
+    font-size: calc(1em - 2pt)
+}
+
+#assetTable tbody th {
+    text-align: center
+}
+
+#assetTable input[type="number"] {
+    text-align: right
+}
+
+#assetTable col.col-asset {
+    width: 20%
+}
+
+#assetTable col.col-price {
+    width: 25%
+}
+
+#assetTable col.col-qty {
+    width: 35%
+}
+
+#assetTable col.col-value {
+    width: 20%
+}
+
+#assetTable tbody td:nth-child(2) .unit {
+    display: block;
+    text-align: center;
+    font-size: calc(1em - 2pt)
+}
+
+#assetTable tbody td:nth-child(3) .unit {
+    display: block;
+    text-align: right
+}
+
+#assetTable input[type="number"] {
+    text-align: right
+}
+
+#assetTable tbody th button.ghost-btn {
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer
+}
+
+#goldModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .35);
+    display: none;
+    z-index: 2003
+}
+
+#goldModal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#goldModal .box {
+    width: min(92vw, 420px);
+    background: #fff;
+    border: 1px solid #d9d9de;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+    overflow: hidden
+}
+
+#goldModal .head {
+    font-weight: 800;
+    padding: 12px 14px;
+    border-bottom: 1px solid #eee
+}
+
+#goldModal .body {
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px 8px
+}
+
+#goldModal .body input[type="number"] {
+    width: 96px;
+    padding: 10px;
+    border: 1px solid #d9d9de;
+    border-radius: 10px;
+    text-align: right
+}
+
+#goldModal .actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    padding: 10px 14px;
+    border-top: 1px solid #eee
+}
+
+#goldModal .actions button {
+    padding: 10px 12px;
+    border: 1px solid #d9d9de;
+    border-radius: 10px;
+    background: #fff;
+    font-weight: 700
+}
+
+#goldModal .actions .primary {
+    background: #111;
+    color: #fff
+}
+
+#assetTable tbody th button.ghost-btn {
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer
+}
+
+#silverModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .35);
+    display: none;
+    z-index: 2003
+}
+
+#silverModal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#silverModal .box {
+    width: min(92vw, 420px);
+    background: #fff;
+    border: 1px solid #d9d9de;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+    overflow: hidden
+}
+
+#silverModal .head {
+    font-weight: 800;
+    padding: 12px 14px;
+    border-bottom: 1px solid #eee
+}
+
+#silverModal .body {
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 10px 8px
+}
+
+#silverModal .body input[type="number"] {
+    width: 96px;
+    padding: 10px;
+    border: 1px solid #d9d9de;
+    border-radius: 10px;
+    text-align: right
+}
+
+#silverModal .actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    padding: 10px 14px;
+    border-top: 1px solid #eee
+}
+
+#silverModal .actions button {
+    padding: 10px 12px;
+    border: 1px solid #d9d9de;
+    border-radius: 10px;
+    background: #fff;
+    font-weight: 700
+}
+
+#silverModal .actions .primary {
+    background: #111;
+    color: #fff
+}
+
+footer {
+    margin: 12px 0;
+}
+
+.links {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px;
+}
+
+.links a {
+    display: block;
+    padding: 8px 6px;
+    color: #111;
+    text-decoration: none;
+    border-bottom: 1px dashed #eee;
+}
+
+.links a:last-child {
+    border-bottom: 0;
+}
+
+.muted {
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+#quickSheet {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    border-top: 1px solid var(--border);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, .18);
+    max-height: 65vh;
+    overflow: auto;
+    z-index: 999;
+    display: none
+}
+
+#quickSheet.show {
+    display: block
+}
+
+#quickSheet .links {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none
+}
+
+#quickSheet .sheet-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 800
+}
+
+#titleModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .35);
+    display: none;
+    z-index: 2002
+}
+
+#titleModal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#titleModal .modal-box {
+    width: min(92vw, 420px);
+    background: #fff;
+    border: 1px solid #d9d9de;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .2);
+    overflow: hidden
+}
+
+#titleModal .modal-head {
+    font-weight: 800;
+    padding: 12px 14px;
+    border-bottom: 1px solid #eee
+}
+
+#titleModal .modal-body {
+    padding: 12px 14px
+}
+
+#titleModal .modal-body input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d9d9de;
+    border-radius: 10px;
+    font-size: 1rem
+}
+
+#titleModal .modal-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    padding: 10px 14px;
+    border-top: 1px solid #eee
+}
+
+#titleModal .modal-actions button {
+    padding: 10px 12px;
+    border: 1px solid #d9d9de;
+    border-radius: 10px;
+    background: #fff;
+    font-weight: 700
+}
+
+#titleModal .modal-actions .primary {
+    background: #111;
+    color: #fff
+}
+
+#toast {
+    position: fixed;
+    left: 50%;
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(17, 17, 17, .92);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-weight: 700;
+    z-index: 2001;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, transform .2s
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0)
+}

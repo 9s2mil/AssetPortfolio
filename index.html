@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="portfolio.css">
+  <title>자산 포트폴리오 계산기</title>
+
+</head>
+
+<body>
+  <div class="wrap">
+
+  <header>
+    <h1 id="title">자산 포트폴리오</h1>
+    <div class="dash"></div>
+    <section id="controls" class="card" style="padding:10px">
+      <div id="controls-center">
+        <button id="resetPresets">🗑️</button>
+        <button id="zeroBtn">🔄</button>
+        <button id="presetA">1️⃣</button>
+        <button id="presetB">2️⃣</button>
+        <button id="presetC">3️⃣</button>
+        <button id="savePreset">💾</button>
+        <button id="toggleSheet" class="primary">🔗</button>
+      </div>  
+    </section>
+    <div class="muted" style="text-align:center">바뜨르 케레이</div>
+  </header>
+
+  <!-- === Main: 1) 총자산 박스 === -->
+  <section class="card" id="totalBox">
+    합계 : <ruby><rb id="totalKRWDigits">0</rb><rt id="totalKRWHangul">0</rt></ruby>
+  </section>
+
+  <!-- === Main: 2) 자원 계산 테이블 === -->
+  <section class="card" aria-label="자원 계산">
+    <table id="assetTable">
+      <colgroup>
+        <col class="col-asset">
+        <col class="col-price">
+        <col class="col-qty">
+        <col class="col-value">
+      </colgroup>
+      <thead>
+        <tr>
+          <th>자원</th>
+          <th>시세</th>
+          <th>수량</th>
+          <th>가격</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- 원화 -->
+        <tr data-key="krw">
+          <th>원화</th>
+          <td>
+            <input id="p-krw" type="number" step="1" min="1" value="1" placeholder="1" disabled>
+            <span class="unit">KRW / KRW</span>
+          </td>
+          <td>
+            <input id="q-krw" type="number" step="1" min="0" placeholder="">
+            <span class="unit">KRW</span>
+          </td>
+          <td class="num" id="v-krw">0</td>
+        </tr>
+
+        <!-- 금 (그램 기준) -->
+        <tr data-key="gold">
+          <th><button id="goldChooserBtn" class="ghost-btn">금</button></th>
+          <td>
+            <input id="p-gold" type="number" step="1" min="0" placeholder="">
+            <span class="unit">KRW / g</span>
+          </td>
+          <td>
+            <input id="q-gold" type="number" step="0.001" min="0" placeholder="">
+            <span class="unit">g</span>
+          </td>
+          <td class="num" id="v-gold">0</td>
+        </tr>
+          
+        <!-- 은 -->
+        <tr data-key="silver">
+          <th><button id="silverChooserBtn" class="ghost-btn">은</button></th>
+          <td>
+            <input id="p-silver" type="number" step="1" min="0" placeholder="">
+            <span class="unit">KRW / g</span>
+          </td>
+          <td>
+            <input id="q-silver" type="number" step="0.001" min="0" placeholder="">
+            <span class="unit">g</span>
+          </td>
+          <td class="num" id="v-silver">0</td>
+        </tr>
+
+        <!-- 달러 -->
+        <tr data-key="usd">
+          <th>달러</th>
+          <td>
+            <input id="p-usd" type="number" step="1" min="0" placeholder="">
+            <span class="unit">KRW / USD</span>
+          </td>
+          <td>
+            <input id="q-usd" type="number" step="0.01" min="0" placeholder="">
+            <span class="unit">USD</span>
+          </td>
+          <td class="num" id="v-usd">0</td>
+        </tr>
+
+        <!-- 엔 -->
+        <tr data-key="jpy">
+          <th>엔</th>
+          <td>
+            <input id="p-jpy" type="number" step="0.1" min="0" placeholder="">
+            <span class="unit">KRW / JPY</span>
+          </td>
+          <td>
+            <input id="q-jpy" type="number" step="1" min="0" placeholder="">
+            <span class="unit">JPY</span>
+          </td>
+          <td class="num" id="v-jpy">0</td>
+        </tr>
+
+        <!-- 비트코인 -->
+        <tr data-key="btc">
+          <th>비트코인</th>
+          <td>
+            <input id="p-btc" type="number" step="1" min="0" placeholder="">
+            <span class="unit">KRW / BTC</span>
+          </td>
+          <td>
+            <input id="q-btc" type="number" step="0.00000001" min="0" placeholder="">
+            <span class="unit">BTC</span>
+          </td>
+          <td class="num" id="v-btc">0</td>
+        </tr>
+
+        <!-- 테더 -->
+        <tr data-key="usdt">
+          <th>테더</th>
+          <td>
+            <input id="p-usdt" type="number" step="1" min="0" placeholder="">
+            <span class="unit">KRW / USDT</span>
+          </td>
+          <td>
+            <input id="q-usdt" type="number" step="0.01" min="0" placeholder="">
+            <span class="unit">USDT</span>
+          </td>
+          <td class="num" id="v-usdt">0</td>
+        </tr>
+
+        <!-- 이더리움 -->
+        <tr data-key="eth">
+          <th>이더리움</th>
+          <td>
+            <input id="p-eth" type="number" step="1" min="0" placeholder="">
+            <span class="unit">KRW / ETH</span>
+          </td>
+          <td>
+            <input id="q-eth" type="number" step="0.0001" min="0" placeholder="">
+            <span class="unit">ETH</span>
+          </td>
+          <td class="num" id="v-eth">0</td>
+        </tr>
+
+        <!-- 리플 -->
+        <tr data-key="xrp">
+          <th>리플</th>
+          <td>
+            <input id="p-xrp" type="number" step="1" min="0" placeholder="">
+            <span class="unit">KRW / XRP</span>
+          </td>
+          <td>
+            <input id="q-xrp" type="number" step="0.01" min="0" placeholder="">
+            <span class="unit">XRP</span>
+          </td>
+          <td class="num" id="v-xrp">0</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- === 네이버 빠른 검색 === -->
+  <div id="quickSheet">
+    <div class="sheet-head">
+      <div>빠른 시세 검색</div>
+      <button id="closeSheet">❌</button>
+    </div>
+    <div class="links">
+      <a target="_blank" rel="noopener" href="https://search.naver.com/search.naver?query=1g+%EA%B8%88+%EC%8B%9C%EC%84%B8">네이버 검색 바로가기 링크(1g 금 시세)</a>
+      <a target="_blank" rel="noopener" href="https://search.naver.com/search.naver?query=1g+%EC%9D%80+%EC%8B%9C%EC%84%B8">네이버 검색 바로가기 링크(1g 은 시세)</a>
+      <a target="_blank" rel="noopener" href="https://search.naver.com/search.naver?query=%EB%8B%AC%EB%9F%AC+%ED%99%98%EC%9C%A8">네이버 검색 바로가기 링크(달러 환율)</a>
+      <a target="_blank" rel="noopener" href="https://search.naver.com/search.naver?query=%EC%97%94+%ED%99%98%EC%9C%A8">네이버 검색 바로가기 링크(엔 환율)</a>
+      <a target="_blank" rel="noopener" href="https://search.naver.com/search.naver?query=%EB%B9%84%ED%8A%B8%EC%BD%94%EC%9D%B8+%EC%8B%9C%EC%84%B8">네이버 검색 바로가기 링크(비트코인 시세)</a>
+      <a target="_blank" rel="noopener" href="https://search.naver.com/search.naver?query=%ED%85%8C%EB%8D%94+%EC%8B%9C%EC%84%B8">네이버 검색 바로가기 링크(테더 시세)</a>
+      <a target="_blank" rel="noopener" href="https://search.naver.com/search.naver?query=%EC%9D%B4%EB%8D%94%EB%A6%AC%EC%9B%80+%EC%8B%9C%EC%84%B8">네이버 검색 바로가기 링크(이더리움 시세)</a>
+      <a target="_blank" rel="noopener" href="https://search.naver.com/search.naver?query=%EB%A6%AC%ED%94%8C+%EC%8B%9C%EC%84%B8">네이버 검색 바로가기 링크(리플 시세)</a>
+    </div>
+  </div>
+</div>
+
+<div id="titleModal">
+  <div class="modal-box">
+    <div class="modal-head">제목 변경</div>
+    <div class="modal-body">
+      <input id="titleInput" type="text" maxlength="60" placeholder="제목을 입력하세요">
+    </div>
+    <div class="modal-actions">
+      <button id="titleCancel">취소</button>
+      <button id="titleOk" class="primary">확인</button>
+    </div>
+  </div>
+</div>
+
+<div id="goldModal">
+  <div class="box">
+    <div class="head">골드바</div>
+    <div class="body">
+      <div>1000g</div><input id="gci-1000" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>500g</div><input id="gci-500" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>375g</div><input id="gci-375" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>187.5g</div><input id="gci-187_5" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>100g</div><input id="gci-100" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>37.5g (10돈)</div><input id="gci-37_5" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>18.75g</div><input id="gci-18_75" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>10g</div><input id="gci-10" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+    </div>
+    <div class="actions">
+      <button id="goldCancel">취소</button>
+      <button id="goldOk" class="primary">확인</button>
+    </div>
+  </div>
+</div>
+
+<div id="silverModal">
+  <div class="box">
+    <div class="head">실버바</div>
+    <div class="body">
+      <div>1000g</div><input id="sci-1000" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>500g</div><input id="sci-500" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>375g</div><input id="sci-375" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>187.5g</div><input id="sci-187_5" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>100g</div><input id="sci-100" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>37.5g</div><input id="sci-37_5" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>18.75g</div><input id="sci-18_75" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+      <div>10g</div><input id="sci-10" type="number" step="1" min="0" inputmode="numeric" placeholder="">
+    </div>
+    <div class="actions">
+      <button id="silverCancel">취소</button>
+      <button id="silverOk" class="primary">확인</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script src="portfolio.js" defer></script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js");
+  }
+</script>
+
+</body>
+</html>
