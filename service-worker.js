@@ -3,8 +3,8 @@ const CACHE_NAME = "portfolio-cache-v1";
 const ASSETS_TO_CACHE = [
   "index.html",
   "manifest.json",
-  "portfolio.css",
-  "portfolio.js",
+  "Portfolio.css",
+  "Portfolio.js",
   "p192.png",
   "p512.png"
 ];
