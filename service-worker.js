@@ -30,6 +30,11 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+  const url = new URL(event.request.url);
+
+  // ⭐ 자기 앱 경로가 아니면 절대 건드리지 말 것
+  if (!url.pathname.startsWith("/Portfolio/")) return;
+
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request);
