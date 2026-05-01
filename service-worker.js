@@ -1,12 +1,13 @@
-const CACHE_NAME = "portfolio-cache-v1";
+const CACHE_NAME = "portfolio-cache-v2";
 
 const ASSETS_TO_CACHE = [
-  "index.html",
-  "manifest.json",
-  "Portfolio.css",
-  "Portfolio.js",
-  "p192.png",
-  "p512.png"
+  "/AssetPortfolio/",
+  "/AssetPortfolio/index.html",
+  "/AssetPortfolio/manifest.json",
+  "/AssetPortfolio/Portfolio.css",
+  "/AssetPortfolio/Portfolio.js",
+  "/AssetPortfolio/p192.png",
+  "/AssetPortfolio/p512.png"
 ];
 
 self.addEventListener("install", (event) => {
